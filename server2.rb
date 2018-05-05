@@ -1,14 +1,12 @@
+# encoding : UTF-8
+
 require 'sinatra'
 require './block'
 require 'httparty'
 
-aaaaaa = Blockchain.new
+set :port, 4568
 
-get '/recv' do
-	recv_block = JSON.parse(params["blocks"])
-	aaaaaa.recv(recv_block)
-	aaaaaa.all_blocks.to_json
-	end
+aaaaaa = Blockchain.new
 
 get '/number_of_blocks' do
 	aaaaaa.all_blocks.size.to_s
@@ -22,6 +20,11 @@ get '/add_node' do
 	aaaaaa.add_node(params[:node])
 	end
 
+get '/recv' do
+	recv_block = JSON.parse(params["blocks"])
+	aaaaaa.recv(recv_block)
+	aaaaaa.all_blocks.to_json
+	end
 
 get '/' do 
 

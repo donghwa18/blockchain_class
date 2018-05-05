@@ -7,7 +7,6 @@ def initialize
 	@chain = []
 	@transaction = []
 	@wallet = {}
-	@node = []
 end
 
 def make_a_wallet
@@ -84,8 +83,8 @@ def ask_other_block
 
 	 if @chain.size < other_block.to_i
 	 	jsoned_chain = @chain.to_json
-	 	full_chain = HTTParty.get("http://localhost:" + n + "/recv?blocks=" + jsoned_chain)
-	 	@chain = JSON.parse(full_chain)
+	 	HTTParty.get("http://localhost:" + n + "/recv?blocks=" + jsoned_chain)
+	 	@chain = []
 	 end
 	 end
 
@@ -104,8 +103,6 @@ def recv(blocks)
 	end
 	@chain
 	end
-
-
 
 
 end
